@@ -2,17 +2,16 @@ class Game
 
     def initialize(data)
         @solutions = []
-        @disks  = []
+        @disks     = []
         for i in 0...DISK_NUMBER do
             @disks << Disk.new(data[i])
         end
     end
 
-    # Tell if the current position is a solution to the game.
-    # We're going to look at each tab, from the first to the last.
-    # If we see a sad face, the game is lost. If we see a happy face, we
-    # continue to the next tab. Otherwise, we check the value of the disk
-    # underneath.
+    # Tell if the current position is a solution to the game. Check each
+    # tab clockwise : if it's a sad face, the game is lost. If it's a
+    # happy face, continue to the next tab. Otherwise, check the value
+    # of the next disk's tab.
     def win?
         for i in 0...DISK_SIZE do
             for j in (DISK_NUMBER - 1).downto(0) do
@@ -24,9 +23,9 @@ class Game
         return true
     end
 
-    # Move current disk to next position and return true. If the last
-    # position is reached, apply this to the next disk. If the last
-    # moving disk is at it's maximum position, return false.
+    # Check if the current position wins the game and return true if
+    # successfully moved to the next one. Return false if the last
+    # position has been verified.
     def shift(i)
         @solutions << solution if win?
         return true if @disks[i].shift
@@ -34,8 +33,8 @@ class Game
         return false
     end
 
-    # Check current position and move to the next one until every
-    # combination is tested.
+    # Test every possible solution in the game and return an array of
+    # solutions.
     def solve
         loop do
             break if !shift(DISK_NUMBER - 1)

@@ -35,7 +35,7 @@ DISK_SIZE   = 15  # Number of tabs per disk, must be equal to the number of colu
 
 # This represents the position where numbered tabs are aligned. Every
 # disk's position's offset equals to 0. This data has been manually
-# extracted by precisely reporting the values of the real puzzle. It
+# extracted by precisely reporting the values from the real puzzle. It
 # may vary according to the version of the game you bought. Note that
 # disks indexes are different from disks numbers. For the rest of this
 # program, the actual index will be used for convenience.
@@ -53,10 +53,10 @@ game = Game.new(DATA)
 
 game.solve.each do |solution|
 
-    # About solutions : each solution is an array of offsets. The
-    # first element of the array represents the base. Since it can't
-    # move, it's offset is always 0. Move the other disks
-    # accordingly to see the smiling faces. Keep smiling !
+    # About solutions : each solution is an array of offsets. The first
+    # element of the array represents the base. Since it can't move,
+    # it's offset is always 0. Move the other disks clockwise according
+    # to the values to see the smiling faces. Keep smiling !
     p solution
 
 end
