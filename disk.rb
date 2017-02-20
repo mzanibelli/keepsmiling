@@ -19,9 +19,7 @@ class Disk
     # offset is 0).
     def values
         result = @values.clone
-        @position.offset.times do
-            result.unshift result.pop
-        end
+        @position.offset.times { result.unshift result.pop }
         return result
     end
 

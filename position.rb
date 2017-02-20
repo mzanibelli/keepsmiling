@@ -12,9 +12,8 @@ class Position
         if @offset == DISK_SIZE - 1
             @offset = 0
             return false
-        else
-            @offset += 1
-            return true
         end
+        @offset += 1
+        return true
     end
 end
