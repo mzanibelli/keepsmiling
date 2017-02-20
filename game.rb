@@ -1,10 +1,7 @@
 class Game
 
-    attr_reader :points
-    attr_reader :disks
-
     def initialize(data)
-        @points = 0
+        @solutions = []
         @disks  = []
         for i in 0...DISK_NUMBER do
             @disks << Disk.new(data[i])
@@ -27,22 +24,23 @@ class Game
         return true
     end
 
-    # Test every possible position by moving each disk except the base.
-    # If the current position is valid, add one point. Each position
-    # triggers a yield in order to print the array if needed.
-    def resolve
-        while @disks[1].shift
-            while @disks[2].shift
-                while @disks[3].shift
-                    while @disks[4].shift
-                        if win?
-                            @points += 1
-                        end
-                        yield
-                    end
-                end
-            end
+    # Move current disk to next position and return true. If the last
+    # position is reached, apply this to the next disk. If the last
+    # moving disk is at it's maximum position, return false.
+    def shift(i)
+        @solutions << solution if win?
+        return true if @disks[i].shift
+        return shift(i-1) if i != 1
+        return false
+    end
+
+    # Check current position and move to the next one until every
+    # combination is tested.
+    def solve
+        loop do
+            break if !shift(DISK_NUMBER - 1)
         end
+        return @solutions
     end
 
     # Return the offset of each disk's position.

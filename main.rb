@@ -5,7 +5,7 @@
 Author : Matéo ZANIBELLI (mzanibelli)
 Date   : Mon Feb 20 2017
 About  : How to win at the "Keep Smiling" puzzle game
-Web    : https://mypuzzlecollection.blogspot.fr/2014/02/keep-smiling.html
+Image  : https://www.puzzlemaster.ca/imagecache/products/ffffff/320x320/007/007277.jpg
 ----------------------------------
 The game is composed of 5 disks having 15 values. The value is either a
 smiling face (the OK constant), a sad face (the KO constant), or no face
@@ -51,16 +51,14 @@ DATA = [
 
 game = Game.new(DATA)
 
-game.resolve do
-    if game.win?
+game.solve.each do |solution|
 
-        # About solutions : each solution is an array of offsets. The
-        # first element of the array represents the base. Since it can't
-        # move, it's offset is always 0. Move the other disks
-        # accordingly to see the smiling faces. Keep smiling !
-        puts "SOLUTION #{game.points} : #{game.solution}"
+    # About solutions : each solution is an array of offsets. The
+    # first element of the array represents the base. Since it can't
+    # move, it's offset is always 0. Move the other disks
+    # accordingly to see the smiling faces. Keep smiling !
+    p solution
 
-    end
 end
 
 exit 0
