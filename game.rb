@@ -11,6 +11,11 @@ class Game
         end
     end
 
+    # Tell if the current position is a solution to the game.
+    # We're going to look at each tab, from the first to the last.
+    # If we see a sad face, the game is lost. If we see a happy face, we
+    # continue to the next tab. Otherwise, we check the value of the disk
+    # underneath.
     def win?
         for i in 0...DISK_SIZE do
             for j in (DISK_NUMBER - 1).downto(0) do
@@ -22,6 +27,9 @@ class Game
         return true
     end
 
+    # Test every possible position by moving each disk except the base.
+    # If the current position is valid, add one point. Each position
+    # triggers a yield in order to print the array if needed.
     def resolve
         while @disks[1].shift
             while @disks[2].shift
@@ -37,8 +45,9 @@ class Game
         end
     end
 
+    # Return the offset of each disk's position.
     def solution
-        @disks.map do |disk|
+        return @disks.map do |disk|
             disk.position.offset
         end
     end
